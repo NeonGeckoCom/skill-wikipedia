@@ -9,21 +9,21 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 import wikipedia_for_humans
 from requests.exceptions import ConnectionError
 from adapt.intent import IntentBuilder
-from mycroft.skills.core import (MycroftSkill, intent_handler,
-                                 intent_file_handler)
-from mycroft.messagebus.message import Message
+from mycroft.skills.core import MycroftSkill, intent_handler
 from ovos_utils.skills import blacklist_skill
 from os.path import join, dirname
+from neon_utils.message_utils import get_message_user
 
 
 class WikipediaSkill(MycroftSkill):
     def __init__(self):
         super(WikipediaSkill, self).__init__(name="WikipediaSkill")
         self.idx = 0
-        self.results = []
+        self.results = {}
         self.current_picture = None
         self.current_title = None
 
@@ -36,13 +36,13 @@ class WikipediaSkill(MycroftSkill):
                                 title=self.current_title, fill=None,
                                 override_idle=20, override_animations=True)
 
-    def speak_result(self):
-        if self.idx + 1 > len(self.results):
+    def speak_result(self, user):
+        if self.idx + 1 > len(self.results[user]):
             self.speak_dialog("thats all")
             self.remove_context("wiki_article")
             self.idx = 0
         else:
-            self.speak(self.results[self.idx])
+            self.speak(self.results[user][self.idx])
             self.idx += 1
         self.set_context("Wikipedia", "wikipedia")
         self.display_wiki_entry()
@@ -64,7 +64,7 @@ class WikipediaSkill(MycroftSkill):
             lang = self.lang.split("-")[0]
         try:
             data = wikipedia_for_humans.page_data(search, lang=lang)
-            self._speak_wiki(data)
+            self._speak_wiki(data, get_message_user(message))
         except ConnectionError as e:
             self.log.error("It seems like lang is invalid!!!")
             self.log.error(lang + ".wikipedia.org does not seem to exist")
@@ -76,6 +76,7 @@ class WikipediaSkill(MycroftSkill):
     @intent_handler("wikiroulette.intent")
     def handle_wiki_roulette_query(self, message):
         """ Random wikipedia page """
+        user = get_message_user(message)
         self.gui.show_animated_image(join(dirname(__file__), "ui",
                                           "jumping.gif"))
         self.current_picture = None
@@ -87,7 +88,7 @@ class WikipediaSkill(MycroftSkill):
             lang = self.lang.split("-")[0]
         try:
             data = wikipedia_for_humans.wikiroulette(lang=lang)
-            self._speak_wiki(data)
+            self._speak_wiki(data, user)
         except ConnectionError as e:
             self.log.error("It seems like lang is invalid!!!")
             self.log.error(lang + ".wikipedia.org does not seem to exist")
@@ -96,7 +97,7 @@ class WikipediaSkill(MycroftSkill):
             # TODO Settings meta
             raise e  # just speak regular skill error
 
-    def _speak_wiki(self, data):
+    def _speak_wiki(self, data, user):
         self.current_picture = data["images"]
         self.current_title = data["title"]
         answer = data["summary"]
@@ -106,8 +107,8 @@ class WikipediaSkill(MycroftSkill):
             return
         self.log.debug("Wiki summary: " + answer)
         self.idx = 0
-        self.results = answer.split(". ")
-        self.speak_result()
+        self.results[user] = answer.split(". ")
+        self.speak_result(user)
         self.set_context("wiki_article", data["title"])
 
     @intent_handler(IntentBuilder("WikiMore").require("More").
@@ -118,7 +119,7 @@ class WikipediaSkill(MycroftSkill):
             If a "spoken_lines" entry exists in the active contexts
             this can be triggered.
         """
-        self.speak_result()
+        self.speak_result(get_message_user(message))
 
     def stop(self):
         self.gui.release()
@@ -126,5 +127,3 @@ class WikipediaSkill(MycroftSkill):
 
 def create_skill():
     return WikipediaSkill()
-
-
