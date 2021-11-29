@@ -45,7 +45,9 @@ NOTE: this will blacklist the official mycroft skill
 - `tag` - link to github release / branch / commit
 - `version` - link to release/commit of platform repo where this was tested
 
-
+## Credits
+[JarbasAl](https://github.com/JarbasAl)
+[NeonDaniel](https://github.com/NeonDaniel)
 
 ## Category
 **Information**
