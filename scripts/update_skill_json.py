@@ -54,4 +54,6 @@ def get_skill_json():
 
 
 if __name__ == "__main__":
-    get_skill_json()
+    pass
+    # TODO: Needs troubleshooting
+    # get_skill_json()
