@@ -38,6 +38,7 @@ def get_skill_json():
     print(f"skill_dir={skill_dir}")
     skill_json = join(skill_dir, "skill.json")
     skill_spec = build_skill_spec(skill_dir)
+    skill_spec.pop('platform support')
     pprint(skill_spec)
     try:
         with open(skill_json) as f:
@@ -54,6 +55,4 @@ def get_skill_json():
 
 
 if __name__ == "__main__":
-    pass
-    # TODO: Needs troubleshooting
-    # get_skill_json()
+    get_skill_json()
