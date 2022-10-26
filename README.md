@@ -14,14 +14,14 @@ NOTE: this will blacklist the official mycroft skill
 ![](./gui2.gif)
 
 ## Examples 
-* "Tell me about Elon Musk"
-* "Tell me about beans"
-* "Random wikipedia"
-* "Check Wikipedia for beans"
-* "Tell me about the Pembroke Welsh Corgi"
-* "Search for chocolate"
-* "More information" (followup after an initial summary)
-* "Tell me More" (followup after an initial summary)
+* "Tell me about Elon Musk."
+* "Tell me about beans."
+* "Random Wikipedia."
+* "Check Wikipedia for beans."
+* "Tell me about the Pembroke Welsh Corgi."
+* "Search for chocolate."
+* "More information." (followup after an initial summary)
+* "Tell me more." (followup after an initial summary)
 
 # Platform support
 
