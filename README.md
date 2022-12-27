@@ -59,3 +59,4 @@ NOTE: this will blacklist the official mycroft skill
 #wiki
 #question
 #query
+#Neon Enhanced
