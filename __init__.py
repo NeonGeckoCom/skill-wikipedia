@@ -17,6 +17,8 @@ from mycroft.skills.core import MycroftSkill, intent_handler
 from ovos_utils.skills import blacklist_skill
 from os.path import join, dirname
 from neon_utils.message_utils import get_message_user
+from ovos_utils import classproperty
+from ovos_utils.process_utils import RuntimeRequirements
 
 
 class WikipediaSkill(MycroftSkill):
@@ -26,6 +28,18 @@ class WikipediaSkill(MycroftSkill):
         self.results = {}
         self.current_picture = None
         self.current_title = None
+
+    @classproperty
+    def runtime_requirements(self):
+        return RuntimeRequirements(network_before_load=False,
+                                   internet_before_load=False,
+                                   gui_before_load=False,
+                                   requires_internet=True,
+                                   requires_network=True,
+                                   requires_gui=False,
+                                   no_internet_fallback=False,
+                                   no_network_fallback=False,
+                                   no_gui_fallback=True)
 
     def initialize(self):
         blacklist_skill("mycroft-wiki.mycroftai")
