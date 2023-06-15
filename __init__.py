@@ -13,17 +13,18 @@
 import wikipedia_for_humans
 from requests.exceptions import ConnectionError
 from adapt.intent import IntentBuilder
-from mycroft.skills.core import MycroftSkill, intent_handler
+from mycroft.skills.core import intent_handler
 from ovos_utils.skills import blacklist_skill
 from os.path import join, dirname
 from neon_utils.message_utils import get_message_user
 from ovos_utils import classproperty
 from ovos_utils.process_utils import RuntimeRequirements
+from neon_utils.skills.neon_skill import NeonSkill
 
 
-class WikipediaSkill(MycroftSkill):
-    def __init__(self):
-        super(WikipediaSkill, self).__init__(name="WikipediaSkill")
+class WikipediaSkill(NeonSkill):
+    def __init__(self, **kwargs):
+        NeonSkill.__init__(self, **kwargs)
         self.idx = 0
         self.results = {}
         self.current_picture = None
@@ -41,6 +42,7 @@ class WikipediaSkill(MycroftSkill):
                                    no_network_fallback=False,
                                    no_gui_fallback=True)
 
+    # TODO: Move to __init__ after ovos-workshop refactor
     def initialize(self):
         blacklist_skill("mycroft-wiki.mycroftai")
 
@@ -138,6 +140,3 @@ class WikipediaSkill(MycroftSkill):
     def stop(self):
         self.gui.release()
 
-
-def create_skill():
-    return WikipediaSkill()
