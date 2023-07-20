@@ -1,13 +1,12 @@
 # Changelog
 
-## [0.4.2a2](https://github.com/NeonGeckoCom/skill-wikipedia/tree/0.4.2a2) (2023-06-15)
+## [1.0.1a1](https://github.com/NeonGeckoCom/skill-wikipedia/tree/1.0.1a1) (2023-07-19)
 
-[Full Changelog](https://github.com/NeonGeckoCom/skill-wikipedia/compare/0.4.1...0.4.2a2)
+[Full Changelog](https://github.com/NeonGeckoCom/skill-wikipedia/compare/1.0.0...1.0.1a1)
 
 **Merged pull requests:**
 
-- Update GH automation to best practices [\#23](https://github.com/NeonGeckoCom/skill-wikipedia/pull/23) ([NeonDaniel](https://github.com/NeonDaniel))
-- Deprecate create\_skill method and Update \_\_init\_\_ for best practices [\#21](https://github.com/NeonGeckoCom/skill-wikipedia/pull/21) ([NeonDaniel](https://github.com/NeonDaniel))
+- Pin dependencies to resolve breaking changes in `wikipedia-api` [\#25](https://github.com/NeonGeckoCom/skill-wikipedia/pull/25) ([NeonDaniel](https://github.com/NeonDaniel))
 
 
 
