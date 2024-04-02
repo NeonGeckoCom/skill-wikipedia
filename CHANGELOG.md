@@ -1,12 +1,20 @@
 # Changelog
 
-## [1.0.1a1](https://github.com/NeonGeckoCom/skill-wikipedia/tree/1.0.1a1) (2023-07-19)
+## [1.0.2a2](https://github.com/NeonGeckoCom/skill-wikipedia/tree/1.0.2a2) (2024-04-02)
 
-[Full Changelog](https://github.com/NeonGeckoCom/skill-wikipedia/compare/1.0.0...1.0.1a1)
+[Full Changelog](https://github.com/NeonGeckoCom/skill-wikipedia/compare/1.0.2a1...1.0.2a2)
 
 **Merged pull requests:**
 
-- Pin dependencies to resolve breaking changes in `wikipedia-api` [\#25](https://github.com/NeonGeckoCom/skill-wikipedia/pull/25) ([NeonDaniel](https://github.com/NeonDaniel))
+- Allow ovos-utils 0.1 [\#29](https://github.com/NeonGeckoCom/skill-wikipedia/pull/29) ([NeonDaniel](https://github.com/NeonDaniel))
+
+## [1.0.2a1](https://github.com/NeonGeckoCom/skill-wikipedia/tree/1.0.2a1) (2024-02-07)
+
+[Full Changelog](https://github.com/NeonGeckoCom/skill-wikipedia/compare/1.0.1...1.0.2a1)
+
+**Merged pull requests:**
+
+- Update for k8s and ovos-core compat. [\#28](https://github.com/NeonGeckoCom/skill-wikipedia/pull/28) ([NeonDaniel](https://github.com/NeonDaniel))
 
 
 
